@@ -1,0 +1,19 @@
+#
+# test file for triphic points definition
+# smarts defined in triphic_test.smt
+# each line defines a type of point of interest. The first string (donor,
+# acceptor, posch etc) is the name of the type and the other strings are the
+# names of the SMARTS definitions to define that type.  In the examples below,
+# rings will thus be comprised the centroid of either 5- or 6-membered rings
+# but any other ring size will be ignored. In the SMARTS file, ring5 is defined
+# as *1****1 and ring 6 as *1*****1.
+donor DON
+acceptor ACC
+posch PROT
+negch ANION
+rings aring5 aring6
+PIP pip
+PIPERD piperd
+BOTH pip piperd
+#hphobe ITMOC_ALO
+

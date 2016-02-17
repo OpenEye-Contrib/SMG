@@ -1,0 +1,74 @@
+Description
+===========
+
+This project builds the program smg (SMARTS Multiplet Generator).  It
+generates what might loosely be called 2D pharmacophore fingerprints.
+In this case, it's a file of 1s and 0s for each input molecule,
+denoting the presence or absence of a particular pharmacophore
+grouping.  Smg can output sites, pairs or triplets.  Sites are the
+individual pharmacophore features, pairs are combinations of 2
+features and a through-bond distance (i.e. the counts of the number of
+bonds between the two features via the shortest path) and triplets are
+three features with through-bond distances.
+
+An example pair would be acceptor:3:posch i.e. an h-bond acceptor 3
+bonds from a positive charge.
+
+An example triplet would be
+acceptor:10:acceptor-acceptor:11:rings-acceptor:12:rings which
+describes 2 h-bond acceptors and a ring 10, 11 and 12 bonds apart.
+When calculating the distance of a ring to another feature, it is
+always taken as the nearest ring atom to the feature, so the distance
+is always the shortest possible.
+
+The pharmacophore features are described using a set of SMARTS
+definitions and a description of how the SMARTS patterns should be
+combined to form the feature.  An example of each input file is in the
+test_dir directory, as test.smt and test.points respectively.
+
+In the output file, the columns are headed by a short, unintelligble
+label.  This a hashed version of the full name for the feature.  A
+subsidiary file with suffix name_decode is made which provides a
+translation.  This was done to keep the file of a manageable size, and
+dates from the days when people at AZ were analysing stuff using SAS
+which had a relatively short upper limit on the length of a column
+name.
+
+Building the program
+====================
+
+Requires: a recent version of OEChem.
+
+To build it, use the CMakeLists.txt file in the src directory. It
+requires the following environment variable to point to a relevant
+place:
+
+OE_DIR - the top level of an OEChem distribution
+
+Then cd to src and do something like:
+     mkdir dev-build
+     cd dev-build
+     cmake -DCMAKE\_BUILD\_TYPE=DEBUG ..
+     make
+
+If all goes to plan, this will make a directory src/../exe_DEBUG with the
+executables in it. These will have debugging information in them.
+
+For a release version:
+    mkdir prod-build
+    cd prod-build
+    cmake -DCMAKE\_BUILD\_TYPE=RELEASE ..
+    make
+
+and you'll get stuff in src/../exe_RELEASE which should have full
+compiler optimisation applied.
+
+These instructions have only been tested in Centos 6 and Ubuntu 14.04
+Linux systems.  I have no experience of using them on Windows or OSX,
+and no means of doing so.
+
+David Cosgrove
+AstraZeneca
+12th February 2016
+
+davidacosgroveaz@gmail.com
